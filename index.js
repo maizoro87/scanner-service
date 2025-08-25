@@ -3,7 +3,12 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+// Ensure PORT is a valid number
+let PORT = parseInt(process.env.PORT) || 3000;
+if (isNaN(PORT) || PORT < 1 || PORT > 65535) {
+  console.error(`Invalid PORT: ${process.env.PORT}, using default 3000`);
+  PORT = 3000;
+}
 
 // Import scanner service
 const { PlaywrightScanner } = require('./scanner');
@@ -182,7 +187,13 @@ app.use((err, req, res, next) => {
 
 // Start server - bind to 0.0.0.0 for Render
 const HOST = '0.0.0.0';
-app.listen(PORT, HOST, () => {
+console.log(`Starting server with PORT=${PORT} (env.PORT=${process.env.PORT})`);
+
+app.listen(PORT, HOST, (err) => {
+  if (err) {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  }
   console.log(`🚀 Enhanced Scanner Service running on ${HOST}:${PORT}`);
   console.log(`Features: Playwright browser automation, AI insights, resource extraction`);
   console.log(`Endpoints:`);

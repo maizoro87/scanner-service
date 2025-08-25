@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(PORT=10000 node index.js)"
     ],
     "deny": [],
     "ask": []

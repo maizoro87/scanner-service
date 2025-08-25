@@ -10,7 +10,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+
+// Parse PORT with validation
+let PORT = process.env.PORT || 3001;
+// Ensure PORT is a valid number
+if (PORT && isNaN(parseInt(PORT))) {
+  console.warn(`Invalid PORT value: ${PORT}, using default 3001`);
+  PORT = 3001;
+} else {
+  PORT = parseInt(PORT);
+}
 
 // CORS configuration - update with your Replit URL
 const ALLOWED_ORIGINS = [

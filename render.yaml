@@ -4,10 +4,8 @@ services:
     runtime: node
     repo: https://github.com/maizoro87/scanner-service
     buildCommand: npm install && npx playwright install chromium --with-deps
-    startCommand: ./start.sh
+    startCommand: node index.js
     envVars:
-      - key: PORT
-        value: 3001
       - key: SCANNER_API_KEY
         generateValue: true  # Render will generate a secure key
       - key: MAIN_APP_URL

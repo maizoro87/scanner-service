@@ -4,9 +4,10 @@
   "description": "Enhanced scanner service with Playwright and AI",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "npx playwright install chromium --with-deps",
-    "postinstall": "npx playwright install chromium --with-deps"
+    "start": "./start.sh",
+    "start:node": "node index.js",
+    "build": "chmod +x start.sh && npx playwright install chromium",
+    "postinstall": "npx playwright install chromium"
   },
   "dependencies": {
     "express": "^4.18.2",

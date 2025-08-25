@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: smchs-scanner
+    runtime: node
+    repo: https://github.com/YOUR_USERNAME/scanner-service
+    buildCommand: npm install && npx playwright install chromium --with-deps
+    startCommand: ./start.sh
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: SCANNER_API_KEY
+        generateValue: true  # Render will generate a secure key
+      - key: MAIN_APP_URL
+        value: https://your-replit-app.replit.app  # Update with your Replit URL
+      - key: DEFAULT_ENGINE
+        value: playwright
+    autoDeploy: true  # Auto-deploy on git push

@@ -1,0 +1,20 @@
+{
+  "name": "scanner-microservice",
+  "version": "1.0.0",
+  "description": "Lightweight scanner service for SMCHS Innovation Hub",
+  "main": "index-light.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index-light.js",
+    "dev": "node --watch index-light.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^21.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

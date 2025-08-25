@@ -48,7 +48,9 @@ class PlaywrightScanner {
     try {
       browser = await chromium.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        // Try to use system Chrome if Playwright browsers not installed
+        executablePath: process.env.CHROME_BIN || undefined
       });
 
       // Scan each URL

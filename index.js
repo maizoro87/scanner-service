@@ -11,10 +11,10 @@ if (isNaN(PORT) || PORT < 1 || PORT > 65535) {
 }
 
 // Import scanner service
-const { PlaywrightScanner } = require('./scanner');
+const HybridScanner = require('./scanner-hybrid');
 
-// Initialize scanner
-const playwrightScanner = new PlaywrightScanner();
+// Initialize scanner (will auto-detect Playwright/Puppeteer/Basic)
+const scanner = new HybridScanner();
 
 // Middleware
 app.use(cors());
@@ -46,7 +46,7 @@ app.post('/scan', async (req, res) => {
     }
     
     // Use Playwright scanner for basic scan
-    const result = await playwrightScanner.performDeepTargetedScan(
+    const result = await scanner.performDeepTargetedScan(
       { main: url },
       'Tool'
     );
@@ -90,7 +90,7 @@ app.post('/targeted-scan', async (req, res) => {
     console.log(`Starting targeted scan for ${toolName}...`);
     
     // Use Playwright scanner for better results
-    const result = await playwrightScanner.performDeepTargetedScan(urls, toolName);
+    const result = await scanner.performDeepTargetedScan(urls, toolName);
     
     res.json({
       success: true,
@@ -129,7 +129,7 @@ app.post('/deep-scan', async (req, res) => {
     const name = toolName || 'Educational Tool';
     
     // Use Playwright scanner for deep analysis
-    const result = await playwrightScanner.performDeepTargetedScan(
+    const result = await scanner.performDeepTargetedScan(
       { main: url },
       name
     );

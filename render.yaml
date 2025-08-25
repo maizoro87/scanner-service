@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: smchs-scanner
+    runtime: node
+    repo: https://github.com/maizoro87/scanner-service
+    branch: scanner-deploy
+    buildCommand: npm install && npx playwright install chromium --with-deps
+    startCommand: npm start
+    envVars:
+      - key: SCANNER_API_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: MAIN_APP_URL
+        value: https://your-replit-app.replit.app
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true

@@ -3,11 +3,15 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-// Ensure PORT is a valid number
-let PORT = parseInt(process.env.PORT) || 3000;
-if (isNaN(PORT) || PORT < 1 || PORT > 65535) {
-  console.error(`Invalid PORT: ${process.env.PORT}, using default 3000`);
-  PORT = 3000;
+// Ensure PORT is a valid number - handle Render's port format
+let PORT = 3000; // default
+if (process.env.PORT) {
+  const parsedPort = parseInt(process.env.PORT);
+  if (!isNaN(parsedPort) && parsedPort > 0 && parsedPort <= 65535) {
+    PORT = parsedPort;
+  } else {
+    console.warn(`Invalid PORT value: ${process.env.PORT}, using default 3000`);
+  }
 }
 
 // Import scanner service

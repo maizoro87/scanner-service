@@ -3,7 +3,7 @@
 # Start script for scanner service
 # No longer installs Playwright browsers at runtime - this is handled during build
 
-echo "Starting Scanner Microservice..."
+echo "Starting Scanner Service Enhanced..."
 
 # Start the Node.js application
 exec node index.js

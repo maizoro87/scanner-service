@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "./start.sh",
-    "start:node": "node index.js",
-    "build": "./build.sh",
+    "start": "node index.js",
+    "start:sh": "./start.sh",
+    "build": "npm install",
     "dev": "node --watch index.js",
     "test": "node test.js",
     "install-browsers": "playwright install chromium"

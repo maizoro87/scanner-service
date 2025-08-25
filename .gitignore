@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.ts
+server/
+attached_assets/
+dist/
+playmcp/
+.claude/

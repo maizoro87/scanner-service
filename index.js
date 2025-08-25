@@ -5,13 +5,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Import scanner services
-const { PlaywrightScanner } = require('./server/services/playwright-scanner');
-const { EnhancedTargetedScanner } = require('./server/services/enhanced-targeted-scanner');
+// Import scanner service
+const { PlaywrightScanner } = require('./scanner');
 
-// Initialize scanners
+// Initialize scanner
 const playwrightScanner = new PlaywrightScanner();
-const enhancedScanner = new EnhancedTargetedScanner();
 
 // Middleware
 app.use(cors());
@@ -119,8 +117,8 @@ app.post('/deep-scan', async (req, res) => {
     
     const name = toolName || 'Educational Tool';
     
-    // Use enhanced scanner for deep analysis
-    const result = await enhancedScanner.performDeepTargetedScan(
+    // Use Playwright scanner for deep analysis
+    const result = await playwrightScanner.performDeepTargetedScan(
       { main: url },
       name
     );

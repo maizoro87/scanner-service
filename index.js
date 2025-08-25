@@ -15,14 +15,20 @@ const playwrightScanner = new PlaywrightScanner();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-// Health check
+// Health check endpoints for Render
 app.get('/', (req, res) => {
   res.json({ 
     service: 'Scanner Service Enhanced',
     version: '2.0.0',
     status: 'running',
+    port: PORT,
     features: ['playwright', 'ai-insights', 'targeted-scan', 'resource-extraction']
   });
+});
+
+// Additional health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
 // Basic scan endpoint (backwards compatible)
@@ -174,9 +180,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Enhanced Scanner Service running on port ${PORT}`);
+// Start server - bind to 0.0.0.0 for Render
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Enhanced Scanner Service running on ${HOST}:${PORT}`);
   console.log(`Features: Playwright browser automation, AI insights, resource extraction`);
   console.log(`Endpoints:`);
   console.log(`  POST /scan - Basic URL scanning`);
